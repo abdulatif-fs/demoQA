@@ -1,14 +1,14 @@
 import {browser, $} from '@wdio/globals'
 
-class Login{
+class WebTable{
     // element locators
-    get usernameField() {return $('#user-name')}
-    get passwordField() {return $('#password')}
-    get loginButton() {return $('#login-button')}
+    get tableHeader() {return $('[role=columnheader]')}
+    get tableValues() {return $('[role=rowgroup]')}
+    get newRecordButton() {return $('#addNewRecordButton')}
 
     // page action
     async openPage(){
-        await browser.url('https://www.saucedemo.com/')
+        await browser.url('https://demoqa.com/webtables')
     }
 
     async inputUsername(text){
@@ -24,4 +24,4 @@ class Login{
     }
 }
 
-export default new Login
+export default new WebTable

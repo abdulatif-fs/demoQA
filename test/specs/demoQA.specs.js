@@ -1,9 +1,10 @@
 import {browser, $, expect} from '@wdio/globals'
+import WebTable from '../pageobjects/webtable.page'
 
 describe('EndtoEnd Testing Demo QA', function(){
     describe('WebTables DemoQA', function(){
         before(async function(){
-            await browser.url('https://demoqa.com/webtables')
+            await WebTable.openPage()
             await expect(browser).toHaveUrl('https://demoqa.com/webtables')
         })
         it('Read data', async function(){
