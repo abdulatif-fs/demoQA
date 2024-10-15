@@ -1,0 +1,13 @@
+{
+  "name": "wdiotemplate",
+  "type": "module",
+  "devDependencies": {
+    "@wdio/local-runner": "^9.1.2",
+    "@wdio/mocha-framework": "^9.1.2",
+    "@wdio/spec-reporter": "^9.1.2",
+    "@wdio/visual-service": "^6.0.0"
+  },
+  "scripts": {
+    "wdio": "wdio run ./wdio.conf.js"
+  }
+}
