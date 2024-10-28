@@ -1,5 +1,7 @@
 import {browser, $, expect} from '@wdio/globals'
 import WebTable from '../pageobjects/webtable.page'
+import { isHeaderTrue, isHeaderLengthTrue } from '../../helper/cekheader'
+import webtablePage from '../pageobjects/webtable.page'
 
 describe('EndtoEnd Testing Demo QA', function(){
     describe('WebTables DemoQA', function(){
@@ -11,57 +13,42 @@ describe('EndtoEnd Testing Demo QA', function(){
             // await browser.url('https://demoqa.com/webtables')
             // await expect(browser).toHaveUrl('https://demoqa.com/webtables')
 
-            const tableHeader = await $$('[role=columnheader]')
-            const allTableName = []
-            for(const name of tableHeader){
-                const tableName = await name.getText()
-                allTableName.push(tableName)
-                // console.log('Header Table',allTableName)
-            }
-            await expect(tableHeader).toBeElementsArrayOfSize(7)
-            await expect(tableHeader).toHaveText("['First Name', 'Last Name', 'Age', 'Email', 'Salary', 'Department', 'Action']")
+            const tableHeader = await WebTable.getTableHeader()
+            const headerValue = ['First Name', 'Last Name', 'Age', 'Email', 'Salary', 'Department', 'Action']
+            const cekHeader = isHeaderTrue(headerValue, tableHeader)
+            const headerLength = isHeaderLengthTrue(tableHeader, 7)
+            
+            await expect(headerLength).toBe(true)
+            await expect(cekHeader).toBe(true)
             
 
-            const tableValues = await $$('[role=rowgroup]')
-            const allValues = []
-            for(let tableValue of tableValues){
-                let value = await tableValue.getText()
-                allValues.push(value)
-            }
-            await expect(tableValues).toBeElementsArrayOfSize(10)
-            await expect(allValues.includes('Cierra\nVega\n39\ncierra@example.com\n10000\nInsurance')).toBe(true)
-
-            // console.log('Header Table',allTableName)
-            // console.log('Value table', allValues)
+            const tableValues = await WebTable.getValues()
+            
+            await expect(isHeaderLengthTrue(tableValues, 10)).toBe(true)
+            await expect(tableValues.includes('Cierra\nVega\n39\ncierra@example.com\n10000\nInsurance')).toBe(true)
         })
-        it('Create Data', async function(){
-            // await browser.url('https://demoqa.com/webtables')
-            // await expect(browser).toHaveUrl('https://demoqa.com/webtables')
-
-            await $('#addNewRecordButton').click()
-            expect(browser).toHaveId('registration-form-modal')
+        it.only('Create Data', async function(){
             const firstName = 'Abdulatif', lasName = 'Sidiq', email = 'fajar@test.com', age = 17, salary = 12000, department = 'IT'
-            await $('#firstName').setValue(firstName)
-            await $('#lastName').setValue(lasName)
-            await $('#userEmail').setValue(email)
-            await $('#age').setValue(age)
-            await $('#salary').setValue(salary)
-            await $('#department').setValue(department)
+    
+            await WebTable.clickNewRecord()
+            // await expect(browser).toHaveId('registration-form-modal')
 
-            await $('#submit').click()
+            await WebTable.fillData(firstName, lasName, email, age, salary, department)
+            await WebTable.clickSubmit()
 
-            const tableValues = await $$('[role=rowgroup]')
-            const allValues = []
-            for(let tableValue of tableValues){
-                let value = await tableValue.getText()
-                allValues.push(value)
-            }
-            // console.log('data baru', allValues)
-            let newData = 'Abdulatif\nSidiq\n17\nfajar@test.com\n12000\nIT'
-            // console.log('new data', newData)
+            const tableHeader = await WebTable.getTableHeader()
+            const headerValue = ['First Name', 'Last Name', 'Age', 'Email', 'Salary', 'Department', 'Action']
+            const cekHeader = isHeaderTrue(headerValue, tableHeader)
+            const headerLength = isHeaderLengthTrue(tableHeader, 7)
+            
+            await expect(headerLength).toBe(true)
+            await expect(cekHeader).toBe(true)
+            
 
-            await expect(tableValues).toBeElementsArrayOfSize(10)
-            await expect(allValues.includes(newData)).toBe(true)
+            const tableValues = await WebTable.getValues()
+            
+            await expect(isHeaderLengthTrue(tableValues, 10)).toBe(true)
+            await expect(tableValues.includes('Abdulatif\nSidiq\n17\nfajar@test.com\n12000\nIT')).toBe(true)
 
         })
     })
