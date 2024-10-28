@@ -20,9 +20,47 @@ class WebTable{
     get editButton(){return $('#edit-record-1')}
     get deleteButton() {return $('#delete-record-1')}
 
+    get dataPerPage() {return $('[aria-label="rows per page"]')}
+    get fiveDataPage() {return this.dataPerPage.$('[value="5"]')}
+    get twentyDataPage() {return this.dataPerPage.$('[value="20"]')}
+    get twentyFiveDataPage() {return this.dataPerPage.$('[value="25"]')}
+    get fivtyDataPage() {return this.dataPerPage.$('[value="50"]')}
+    get hundredDataPage() {return this.dataPerPage.$('[value="100"]')}
+    get tenDataPage() {return this.dataPerPage.$('[value="10"]')}
+
     // page action
     async openPage(){
         await browser.url('https://demoqa.com/webtables')
+    }
+
+    async get5DataPerPage() {
+        await this.dataPerPage.click()
+        await this.fiveDataPage.click()
+    }
+
+    async get10DataPerPage() {
+        await this.dataPerPage.click()
+        await this.tenDataPage.click()
+    }
+
+    async get20DataPerPage() {
+        await this.dataPerPage.click()
+        await this.twentyDataPage.click()
+    }
+
+    async get25DataPerPage() {
+        await this.dataPerPage.click()
+        await this.twentyFiveDataPage.click()
+    }
+
+    async get50DataPerPage() {
+        await this.dataPerPage.click()
+        await this.fivtyDataPage.click()
+    }
+
+    async get100DataPerPage() {
+        await this.dataPerPage.click()
+        await this.hundredDataPage.click()
     }
 
     async clickDeleteButton() {

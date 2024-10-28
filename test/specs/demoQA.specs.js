@@ -28,6 +28,53 @@ describe('EndtoEnd Testing Demo QA', function(){
                 await expect(isHeaderLengthTrue(tableValues, 10)).toBe(true)
                 await expect(tableValues.includes('Cierra\nVega\n39\ncierra@example.com\n10000\nInsurance')).toBe(true)
             })
+
+            it('show data per page 5', async () => {
+                await WebTable.get5DataPerPage()
+
+                const tableValues = await WebTable.getValues()
+                
+                await expect(isHeaderLengthTrue(tableValues, 5)).toBe(true)
+            })
+
+            it('show data per page 20', async () => {
+                await WebTable.get20DataPerPage()
+
+                const tableValues = await WebTable.getValues()
+                
+                await expect(isHeaderLengthTrue(tableValues, 20)).toBe(true)
+            })
+            it('show data per page 25', async () => {
+                await WebTable.get25DataPerPage()
+
+                const tableValues = await WebTable.getValues()
+                
+                await expect(isHeaderLengthTrue(tableValues, 25)).toBe(true)
+            })
+
+            it('show data per page 50', async () => {
+                await WebTable.get50DataPerPage()
+
+                const tableValues = await WebTable.getValues()
+                
+                await expect(isHeaderLengthTrue(tableValues, 50)).toBe(true)
+            })
+
+            it('show data per page 100', async () => {
+                await WebTable.get100DataPerPage()
+
+                const tableValues = await WebTable.getValues()
+                
+                await expect(isHeaderLengthTrue(tableValues, 100)).toBe(true)
+            })
+
+            it('show data per page 10', async () => {
+                await WebTable.get10DataPerPage()
+
+                const tableValues = await WebTable.getValues()
+                
+                await expect(isHeaderLengthTrue(tableValues, 10)).toBe(true)
+            })
         })
 
         describe("Create Data", function(){
