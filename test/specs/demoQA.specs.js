@@ -41,7 +41,63 @@ describe('EndtoEnd Testing Demo QA', function(){
                 await WebTable.clickSubmit()
                 await expect(WebTable.RegForm).toExist()
             })
-            it('Create Data with and fill all field', async function(){
+
+            it('Create Data with not required email (no @test.com)', async () => {
+                const firstName = 'Abdulatif', lasName = 'Sidiq', email = 'fajar', age = 17, salary = 12000, department = 'IT'
+        
+                // await WebTable.clickNewRecord()
+                // await expect(WebTable.RegForm).toExist()
+    
+                await WebTable.fillData(firstName, lasName, email, age, salary, department)
+                await WebTable.clickSubmit()
+                await expect(WebTable.RegForm).toExist()
+            })
+
+            it('Create Data with not required email (no .com)', async () => {
+                const firstName = 'Abdulatif', lasName = 'Sidiq', email = 'fajar@test', age = 17, salary = 12000, department = 'IT'
+        
+                // await WebTable.clickNewRecord()
+                // await expect(WebTable.RegForm).toExist()
+    
+                await WebTable.fillData(firstName, lasName, email, age, salary, department)
+                await WebTable.clickSubmit()
+                await expect(WebTable.RegForm).toExist()
+            })
+
+            it('Create Data with not required email (no name before @)', async () => {
+                const firstName = 'Abdulatif', lasName = 'Sidiq', email = '@test.com', age = 17, salary = 12000, department = 'IT'
+        
+                // await WebTable.clickNewRecord()
+                // await expect(WebTable.RegForm).toExist()
+    
+                await WebTable.fillData(firstName, lasName, email, age, salary, department)
+                await WebTable.clickSubmit()
+                await expect(WebTable.RegForm).toExist()
+            })
+
+            it('Create Data with string in age', async () => {
+                const firstName = 'Abdulatif', lasName = 'Sidiq', email = 'fajar@test.com', age = "sa", salary = 12000, department = 'IT'
+        
+                // await WebTable.clickNewRecord()
+                // await expect(WebTable.RegForm).toExist()
+    
+                await WebTable.fillData(firstName, lasName, email, age, salary, department)
+                await WebTable.clickSubmit()
+                await expect(WebTable.RegForm).toExist()
+            })
+
+            it('Create Data with string in salary', async () => {
+                const firstName = 'Abdulatif', lasName = 'Sidiq', email = 'fajar@test.com', age = 17, salary = "sa", department = 'IT'
+        
+                // await WebTable.clickNewRecord()
+                // await expect(WebTable.RegForm).toExist()
+    
+                await WebTable.fillData(firstName, lasName, email, age, salary, department)
+                await WebTable.clickSubmit()
+                await expect(WebTable.RegForm).toExist()
+            })
+
+            it('Create Data with fill all field', async function(){
                 const firstName = 'Abdulatif', lasName = 'Sidiq', email = 'fajar@test.com', age = 17, salary = 12000, department = 'IT'
         
                 // await WebTable.clickNewRecord()
