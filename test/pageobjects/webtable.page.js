@@ -15,6 +15,7 @@ class WebTable{
     get department() {return $('#department')}
     get actionButton() {return $('#edit-record-1')}
     get submitButton(){return $('#submit')}
+    get cancelButton() {return $('.close')}
 
     get editButton(){return $('#edit-record-1')}
     get deleteButton() {return $('#delete-record-1')}
@@ -51,6 +52,10 @@ class WebTable{
     
     async clickSubmit(){
         await this.submitButton.click()
+    }
+
+    async clickCancelButton(){
+        await this.cancelButton.click()
     }
 
     async getTableHeader(){

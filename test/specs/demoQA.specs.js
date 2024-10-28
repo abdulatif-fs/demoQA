@@ -121,6 +121,14 @@ describe('EndtoEnd Testing Demo QA', function(){
                 await expect(isHeaderLengthTrue(tableValues, 10)).toBe(true)
                 await expect(tableValues.includes('Abdulatif\nSidiq\n17\nfajar@test.com\n12000\nIT')).toBe(true)
             })
+
+            it('close registration form Create', async () => {
+                await WebTable.clickNewRecord()
+                await expect(WebTable.RegForm).toExist()
+    
+                await WebTable.clickCancelButton()
+                await expect(WebTable.RegForm).not.toExist()
+            })
         })
         
         describe('Edit Data', function() {
@@ -150,6 +158,14 @@ describe('EndtoEnd Testing Demo QA', function(){
                 
                 await expect(isHeaderLengthTrue(tableValues, 10)).toBe(true)
                 await expect(tableValues.includes('Cierra2\nVega\n39\ncierra@example.com\n10000\nInsurance')).toBe(true)
+            })
+
+            it('close registration form Edit', async () => {
+                await WebTable.clickEditRecord()
+                await expect(WebTable.RegForm).toExist()
+    
+                await WebTable.clickCancelButton()
+                await expect(WebTable.RegForm).not.toExist()
             })
         })
         
