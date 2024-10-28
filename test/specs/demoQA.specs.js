@@ -27,7 +27,7 @@ describe('EndtoEnd Testing Demo QA', function(){
             await expect(isHeaderLengthTrue(tableValues, 10)).toBe(true)
             await expect(tableValues.includes('Cierra\nVega\n39\ncierra@example.com\n10000\nInsurance')).toBe(true)
         })
-        it.only('Create Data', async function(){
+        it('Create Data', async function(){
             const firstName = 'Abdulatif', lasName = 'Sidiq', email = 'fajar@test.com', age = 17, salary = 12000, department = 'IT'
     
             await WebTable.clickNewRecord()
@@ -50,6 +50,43 @@ describe('EndtoEnd Testing Demo QA', function(){
             await expect(isHeaderLengthTrue(tableValues, 10)).toBe(true)
             await expect(tableValues.includes('Abdulatif\nSidiq\n17\nfajar@test.com\n12000\nIT')).toBe(true)
 
+        })
+
+        it('Edit Data', async () => {
+            // const firstName = 'Abdulatif', lasName = 'Sidiq', email = 'fajar@test.com', age = 17, salary = 12000, department = 'IT'
+    
+            // await WebTable.clickNewRecord()
+            // await expect(browser).toHaveId('registration-form-modal')
+
+            // await WebTable.fillData(firstName, lasName, email, age, salary, department)
+            // await WebTable.clickSubmit()
+
+            await WebTable.clickEditRecord()
+            await WebTable.editFirstName()
+            await WebTable.clickSubmit()
+
+            const tableHeader = await WebTable.getTableHeader()
+            const headerValue = ['First Name', 'Last Name', 'Age', 'Email', 'Salary', 'Department', 'Action']
+            const cekHeader = isHeaderTrue(headerValue, tableHeader)
+            const headerLength = isHeaderLengthTrue(tableHeader, 7)
+            
+            await expect(headerLength).toBe(true)
+            await expect(cekHeader).toBe(true)
+            
+
+            const tableValues = await WebTable.getValues()
+            
+            await expect(isHeaderLengthTrue(tableValues, 10)).toBe(true)
+            await expect(tableValues.includes('Cierra2\nVega\n39\ncierra@example.com\n10000\nInsurance')).toBe(true)
+        })
+
+        it('delete data', async() => {
+            await WebTable.clickDeleteButton()
+
+            const tableValues = await WebTable.getValues()
+            
+            await expect(isHeaderLengthTrue(tableValues, 10)).toBe(true)
+            await expect(tableValues.includes('Cierra2\nVega\n39\ncierra@example.com\n10000\nInsurance')).toBe(false)
         })
     })
 })

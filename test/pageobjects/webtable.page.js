@@ -4,6 +4,7 @@ class WebTable{
     // element locators
     get tableHeader() {return $$('[role=columnheader]')}
     get tableValues() {return $$('[role=rowgroup]')}
+
     get newRecordButton() {return $('#addNewRecordButton')}
     get firstName() {return $('#firstName')}
     get lasName() {return $('#lastName')}
@@ -11,12 +12,27 @@ class WebTable{
     get age() {return $('#age')}
     get salary() {return $('#salary')}
     get department() {return $('#department')}
-
+    get actionButton() {return $('#edit-record-1')}
     get submitButton(){return $('#submit')}
+
+    get editButton(){return $('#edit-record-1')}
+    get deleteButton() {return $('#delete-record-1')}
 
     // page action
     async openPage(){
         await browser.url('https://demoqa.com/webtables')
+    }
+
+    async clickDeleteButton() {
+        await this.deleteButton.click()
+    }
+
+    async clickEditRecord() {
+        await this.editButton.click()
+    }
+
+    async editFirstName() {
+        await this.firstName.setValue('Cierra2')
     }
 
     async clickNewRecord(){
