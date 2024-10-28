@@ -6,6 +6,7 @@ class WebTable{
     get tableValues() {return $$('[role=rowgroup]')}
 
     get newRecordButton() {return $('#addNewRecordButton')}
+    get RegForm() {return $('#registration-form-modal')}
     get firstName() {return $('#firstName')}
     get lasName() {return $('#lastName')}
     get usernameField() {return $('#userEmail')}
